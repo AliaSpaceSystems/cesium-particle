@@ -1,6 +1,6 @@
 # cesium-based vector field visualization for gpu-accelerated particle systems
 
-! [npm](https://img.shields.io/npm/v/cesium-particle) ! [npm](https://img.shields.io/npm/dt/cesium-particle) ! [GitHub](https://img.shields.io/github/license/hongfaqiu/cesium-particle)
+![npm](https://img.shields.io/npm/v/cesium-particle) ![npm](https://img.shields.io/npm/dt/cesium-particle) ![GitHub](https://img.shields.io/github/license/hongfaqiu/cesium-particle)
 
 ## Description
 
