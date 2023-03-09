@@ -2,14 +2,14 @@ import netcdfjs from 'netcdfjs';
 import { BoundingSphere, Camera, Cartesian2, Scene, Viewer } from 'cesium';
 import CustomPrimitive from './modules/customPrimitive';
 
-/** 棋盘格值枚举 (lev, lat, lon) */
+/** Enumeration of board values (lev, lat, lon) */
 type DimensionValue = {
   array: Float32Array;
   max: number;
   min: number;
 }
 
-/** 纬度值枚举 */
+/** Enumeration of latitude and longitude values */
 type DimensionData = {
   array: Float32Array;
   min: number;
@@ -17,25 +17,25 @@ type DimensionData = {
 }
 
 type JsonData = {
-  /** 三种维度的值的间隔数量 */
+  /** Number of intervals between the values of the three dimensions */
   dimensions: {
       lon: number;
       lat: number;
       lev?: number;
   };
-  /** 所有经度值 */
+  /** All longitude values */
   lon: DimensionData;
-  /** 所有纬度值 */
+  /** All latitude values */
   lat: DimensionData;
-  /** 所有高度分层 */
+  /** All heights layered */
   lev?: DimensionData;
-  /** 横向速度 */
+  /** Horizontal velocity */
   U: DimensionValue;
-  /** 纵向速度 */
+  /** Vertical velocity */
   V: DimensionValue;
-  /** 垂直方向速度 */
+  /** Vertical speed */
   W?: DimensionValue;
-  /** 高度值 */
+  /** Height values */
   H?: DimensionValue;
 }
 
@@ -107,7 +107,7 @@ export declare class Particle3D {
   /**
    * Create a Particle3D Object
    * @example
-   * // load a JSON data 
+   * // load a JSON data
    * new Particle3D(viewer, {
       input: jsonData,
       type: 'json', // 必填
@@ -132,7 +132,7 @@ export declare class Particle3D {
       colour: 'height'
     });
    * @example
-   * // load a NC file 
+   * // load a NC file
    * new Particle3D(viewer, {
       input: BolbFile("uv3z.nc"),
       fields: {
@@ -184,7 +184,7 @@ export declare class Particle3D {
 
   /**
    * Initialize and convert the NC file to JSON format supported by the particle system
-   * @returns A Promise which resolve the processed json data. 
+   * @returns A Promise which resolve the processed json data.
    */
   init(): Promise<JsonData>;
 
@@ -202,12 +202,12 @@ export declare class Particle3D {
    * Start running the particle system
    */
   show(): void;
-  
+
   /**
    * Pause particle system
    */
   hide(): void;
-  
+
   /**
    * Change particle system operating parameters
    * @param maxParticles - Maximum number of particles.
@@ -222,23 +222,23 @@ export declare class Particle3D {
   * @param dynamic - Whether to run dynamically.
   */
   optionsChange(options: UserInput): void;
-  
+
   /**
    * Remove particle systems from CesiumViewer
    */
   remove(): void;
-  
+
 }
 
 export declare class Vortex {
   /**
    * Create a Vortex Object
    * @example
-   * // Create a single-layer vortex model with a length of about 500km, width and height of 2000m. 
+   * // Create a single-layer vortex model with a length of about 500km, width and height of 2000m.
    * //There are 50 sampling points in the X and Y directions.
    * new Vortex([120, 30, 100], 5, 5, 2000, 0.1, 0.1, 2000);
    * @param pos The center [lon, lat] of vortex.
-   * @param radiusX Length in east-west direction, degree. 
+   * @param radiusX Length in east-west direction, degree.
    * @param radiusY Length in sourth-north direction, degree.
    * @param height Vortex's height, metre.
    * @param dx East West sampling interval, in degrees.
@@ -248,18 +248,18 @@ export declare class Vortex {
   constructor(pos: number[], radiusX: number, radiusY: number, height: number, dx: number, dy: number, dz: number);
 
   /**
-   * Get JSON data conforming to particle system standards. 
+   * Get JSON data conforming to particle system standards.
    */
   readonly data: JsonData;
 
   /**
    * Generate JSON data supported by the particle system by passing in parameters
    * @example
-   * // Create a single-layer vortex model with a length of about 500km, width and height of 2000m. 
+   * // Create a single-layer vortex model with a length of about 500km, width and height of 2000m.
    * //There are 50 sampling points in the X and Y directions.
    * Vortex.generateData([120, 30, 100], 5, 5, 2000, 0.1, 0.1, 2000);
    * @param pos The center [lon, lat] of vortex.
-   * @param radiusX Length in east-west direction, degree. 
+   * @param radiusX Length in east-west direction, degree.
    * @param radiusY Length in sourth-north direction, degree.
    * @param height Vortex's height, metre.
    * @param dx East West sampling interval, in degrees.
@@ -271,7 +271,7 @@ export declare class Vortex {
   private generateDimensionData(num: number, start: number, step: number): DimensionData;
 
   /**
-   * Get JSON data conforming to particle system standards. 
+   * Get JSON data conforming to particle system standards.
    */
   getData(): JsonData;
 
@@ -293,7 +293,7 @@ export declare class Vortex {
  * - Longitudinal velocity matrix V (LEV, lat, lon)
  * - Longitude dimension lon
  * - Latitude dimension lat
- * 
+ *
  * [For details](https://github.com/hongfaqiu/cesium-particle#%E6%80%8E%E6%A0%B7%E5%8A%A0%E8%BD%BD%E8%87%AA%E5%B7%B1%E7%9A%84nc%E6%96%87%E4%BB%B6)
  */
 export declare function getFileFields(file: Blob): Promise<{

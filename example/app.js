@@ -34,7 +34,7 @@ fileInput.onchange = function () {
   })
 }
 
-// 加载demo.nc文件按钮
+// Load demo.nc file button
 loadBtn.onclick = function () {
   if (fileInput.files[0] && viewer && !particleObj) {
     const file = fileInput.files[0];
@@ -56,7 +56,7 @@ loadBtn.onclick = function () {
       removeBtn.disabled = false;
       loadBtn.disabled = true;
       generateDataBtn.disabled = true;
-      statechangeBtn.innerText = '隐藏';
+      statechangeBtn.innerText = 'Hide';
       working = true;
     }).catch(e => {
       particleObj.remove();
@@ -66,7 +66,7 @@ loadBtn.onclick = function () {
   }
 };
 
-// 生成涡旋数据按钮
+// Generate vortex data button
 generateDataBtn.onclick = function () {
   const parameter = vortexPanel.getUserInput();
   if (parameter && viewer && !particleObj) {
@@ -84,7 +84,7 @@ generateDataBtn.onclick = function () {
       removeBtn.disabled = false;
       loadBtn.disabled = true;
       generateDataBtn.disabled = true;
-      statechangeBtn.innerText = '隐藏';
+      statechangeBtn.innerText = 'Hide';
       working = true;
     }).catch(e => {
       particleObj.remove();
@@ -97,7 +97,7 @@ generateDataBtn.onclick = function () {
 statechangeBtn.onclick = function () {
   if (particleObj) {
     !working ? particleObj.show() : particleObj.hide();
-    !working ? statechangeBtn.innerText = '隐藏' : statechangeBtn.innerText = '显示';
+    !working ? statechangeBtn.innerText = 'Hide' : statechangeBtn.innerText = 'Show';
     working = !working;
   }
 }
@@ -106,7 +106,7 @@ removeBtn.onclick = function () {
   if (particleObj) {
     particleObj.remove();
     working = false;
-    statechangeBtn.innerText = '显示'
+    statechangeBtn.innerText = 'Show'
     particleObj = null;
     statechangeBtn.disabled = true;
     removeBtn.disabled = true;

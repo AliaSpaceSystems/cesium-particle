@@ -6,7 +6,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'src/shader/'),
     filename: 'shader.min.js',
-    libraryTarget: 'commonjs'  //模块输出方式
+    libraryTarget: 'commonjs'  // Module output method
   },
   resolve: {
     extensions: ['.js'],

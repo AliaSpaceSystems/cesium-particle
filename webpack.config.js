@@ -15,11 +15,11 @@ let config = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    //需要编译Cesium中的多行字符串 
+    // need to compile multi-line strings in Cesium
     sourcePrefix: ''
   },
   amd: {
-      //允许Cesium兼容 webpack的require方式 
+      // Allow Cesium to be compatible with webpack's require method
       toUrlUndefined: true
   },
   mode: 'development',
@@ -72,13 +72,13 @@ let config = {
       ],
     }),
     new webpack.DefinePlugin({
-        //Cesium载入静态的资源的相对路径
+        // Relative paths for loading static resources in Cesium
         CESIUM_BASE_URL: JSON.stringify('cesium/')
     }),
-    new webpack.HotModuleReplacementPlugin(), // 热更新插件
+    new webpack.HotModuleReplacementPlugin(), // Hot Update Plugin
   ],
   devServer: {
-    contentBase: './dist',      // 开发环境的服务目录
+    contentBase: './dist',      // Service catalogue for development environments
     historyApiFallback: true,
     inline: true,
     port: 9000

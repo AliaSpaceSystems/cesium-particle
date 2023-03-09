@@ -10,7 +10,7 @@ const prdWebpackConfig= {
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'cesium-particle.min.js',
-    libraryTarget: 'umd',  //模块输出方式
+    libraryTarget: 'umd',  // Module output method
     umdNamedDefine: true
   },
   resolve: {

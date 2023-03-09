@@ -1,16 +1,16 @@
-# 基于cesium的矢量场可视化gpu加速粒子系统
+# cesium-based vector field visualization for gpu-accelerated particle systems
 
-![npm](https://img.shields.io/npm/v/cesium-particle) ![npm](https://img.shields.io/npm/dt/cesium-particle) ![GitHub](https://img.shields.io/github/license/hongfaqiu/cesium-particle)
+! [npm](https://img.shields.io/npm/v/cesium-particle) ! [npm](https://img.shields.io/npm/dt/cesium-particle) ! [GitHub](https://img.shields.io/github/license/hongfaqiu/cesium-particle)
 
 ## 说明
 
-本模块改编自[RaymanNg大佬的风场demo](https://github.com/RaymanNg/3D-Wind-Field)。
+This module is adapted from the [RaymanNg big man's wind farm demo](https://github.com/RaymanNg/3D-Wind-Field).
 
-加载的.nc文件属于NetCDF version 3数据文件，加载其他.nc文件请看[Q&A](https://github.com/hongfaqiu/cesium-particle#%E6%80%8E%E6%A0%B7%E5%8A%A0%E8%BD%BD%E8%87%AA%E5%B7%B1%E7%9A%84nc%E6%96%87%E4%BB%B6)。
+The loaded .nc file belongs to NetCDF version 3 data file, to load other .nc files please see [Q&A](https://github.com/hongfaqiu/cesium-particle#%E6%80%8E%E6%A0%B7%E5%8A%A0%E8%BD%BD% E8%87%AA%E5%B7%B1%E7%9A%84nc%E6%96%87%E4%BB%B6).
 
-本例使用的demo.nc文件分辨率28km，请参考这个网站上的数据 [Panoply](https://www.giss.nasa.gov/tools/panoply/)。
+The demo.nc file used in this example has a resolution of 28km, see the data on this website [Panoply](https://www.giss.nasa.gov/tools/panoply/)
 
-## 使用说明
+## Instructions for use
 
 <table>
 <tbody valign=top align=left>
@@ -21,7 +21,7 @@ Node 12+
 Install with <code>npm install cesium-particle</code>, or <code>yarn add cesium-particle</code>
 
 ```js
-import  { Particle3D } from "cesium-particle";
+import { Particle3D } from "cesium-particle";
 ```
 
 </td></tr>
@@ -34,10 +34,10 @@ import  { Particle3D } from "cesium-particle";
 import { Particle3D, Vortex } from 'cesium-particle'
 import * as Cesium from 'cesium';
 
-// cesiumViewer对象
+// cesiumViewer object
 const viewer = new Cesium.Viewer(cesiumContainer, viewerOption);
 
-// 粒子系统配置
+// particle system configuration
 const systemOptions = {
   maxParticles: 64 * 64,
   particleHeight: 1000.0,
@@ -49,7 +49,7 @@ const systemOptions = {
   dynamic: true
 }
 
-// 粒子颜色色带
+// Particle colour ribbon
 const colorTable = [
     [0.015686,
     0.054902,
@@ -59,10 +59,10 @@ const colorTable = [
     1.000000]
   ]
 
-// 第一种
-// 加载demo.nc文件
-const file = BolbFile("demo.nc"); // 读取文件
- // 从NetCDF3文件生成粒子系统对象
+// The first one
+// Load the demo.nc file
+const file = BolbFile("demo.nc"); // Read the file
+ // generate a particle system object from a NetCDF3 file
 const particleObj = new Particle3D(viewer, {
   input: file,
   fields: {
@@ -70,9 +70,9 @@ const particleObj = new Particle3D(viewer, {
   }
 });
 
-// 加载uv3z.nc、325china.nc或其他自定义文件
-const file2 = BolbFile("uv3z.nc"); 
- // 需定义字段名
+// load uv3z.nc, 325china.nc or other custom files
+const file2 = BolbFile("uv3z.nc");
+ // field names need to be defined
 const particleObj2 = new Particle3D(viewer, {
   input: file,
   fields: {
@@ -82,113 +82,113 @@ const particleObj2 = new Particle3D(viewer, {
 });
 
 
-// 第二种
-// 构建涡旋模型对象
+// The second
+// Construct the vortex model object
 const parameter = [ [120, 30, 100], 5, 5, 2000, 0.1, 0.1, 2000]; // [['lon', 'lat', 'lev'], 'radiusX', 'radiusY', 'height', 'dx', 'dy', 'dz']
-const jsonData = new Vortex(...parameter).getData();
-// 从json数据生成粒子系统对象
+const jsonData = new Vortex(.. .parameter).getData();
+// generate particle system object from json data
 const particleObj2 = new Particle3D(viewer, {
     input: jsonData,
-    type: 'json', // 必填
+    type: 'json', // required
     userInput: systemOptions,
     colorTable: colorTable,
-    colour: 'height' // 颜色变化跟随速度,可选值: 'speed'(defalut) or 'height'
+    color: 'height' // colour change follows speed, optional value: 'speed'(defalut) or 'height'
   });
 
-// 启动粒子系统
+// Start the particle system
 particleObj.init().then(res => {
-  particleObj.show(); // 开始运行粒子系统
+  particleObj.show(); // start the particle system
 })
 
 systemOptions.fadeOpacity = 0.900;
-particleObj.optionsChange(systemOptions); // 更新粒子系统配置
+particleObj.optionsChange(systemOptions); // update the particle system configuration
 
-particleObj.hide(); // 停止粒子系统
-particleObj.remove(); // 移除粒子系统
+particleObj.hide(); // stop the particle system
+particleObj.remove(); // remove the particle system
 ```
 
 ## API
 
 ### ``new Particle3D(viewer, options)``
 
-新建一个粒子系统对象，传入的参数包括(ceiusmViewer, {.nc矢量场文件或json对象, 传入的数据类型, nc文件字段规定, UVWH数值范围, 经纬度偏移值, 粒子系统配置项, 粒子颜色色带, 上色的属性})
+Create a new particle system object, pass in parameters including (cesiumViewer, {.nc vector field file or json object, incoming data type, nc file field specification, UVWH value range, latitude/longitude offset values, particle system configuration items, particle colour ribbon, colored properties})
 
-``options配置属性详解:``
+``options configuration properties in detail:``
 
-| Name       | Type          | Necessarily | Enumeration         | Default                      |
+| Name | Type | Necessarily | Enumeration | Default |
 | ---------- | ------------- | ----------- | ------------------- | ---------------------------- |
 | input      | File / Object | true        |                     |                              |
 | type       | String        |             | 'nc' or 'json'      | 'nc'                         |
-| fields     | Object        |             |                     | defalutFields                |
+| fields     | Object        |             |                     | defaultFields                |
 | valueRange | Object        |             |                     | { min: -100, max: 100 }      |
 | offset     | Object        |             |                     | { lon: 0, lat: 0, lev: 0 }   |
 | userInput  | Object        |             |                     | defaultParticleSystemOptions |
 | colorTable | Array         |             |                     | defaultColorTable            |
 | colour     | String        |             | 'speed' or 'height' | 'speed'                      |
 
-``默认配置详解:``
+``Default configuration details:``
 
 ```js
-// 默认的nc文件variables字段
+// default nc file variables fields
 defaultFields = {
-  U: 'U', // 横向速度
-  V: 'V', // 纵向速度
-  W: '', // 垂直速度
-  H: '', // 高度属性
-  lon: 'lon', // 经度
-  lat: 'lat', // 纬度
-  lev: '', // 层
+  U: 'U', // lateral speed
+  V: 'V', // longitudinal speed
+  W: '', // vertical speed
+  H: '', // height property
+  lon: 'lon', // longitude
+  lat: 'lat', // latitude
+  lev: '', // layer
 }
 
-// 默认的粒子运行参数
-defaultParticleSystemOptions = { 
-  maxParticles: 64 * 64, // 最大粒子数(会自动取平方数)
-  particleHeight: 1000.0, // 粒子高度
-  fadeOpacity: 0.996, // 拖尾透明度
-  dropRate: 0.003, // 粒子重置率
-  dropRateBump: 0.01, // 随速度增加的粒子重置率百分比，速度越快越密集，
-                      // 最终的粒子重置率particleDropRate = dropRate + dropRateBump * speedNorm;
-  speedFactor: 1.0, // 粒子速度
-  lineWidth: 4.0, // 线宽
-  dynamic: true // 是否动态运行
-}
+// Default particle run parameters
+defaultParticleSystemOptions = {
+  maxParticles: 64 * 64, // maximum number of particles (will automatically take the square number)
+  particleHeight: 1000.0, // particle height
+  fadeOpacity: 0.996, // trailing transparency
+  dropRate: 0.003, // Particle reset rate
+  dropRateBump: 0.01, // the percentage of particle reset rate that increases with speed, the faster the speed the more dense the particle reset rate.
+                      // final particle reset rate particleDropRate = dropRate + dropRateBump * speedNorm;
+  speedFactor: 1.0, // particle speed
+  lineWidth: 4.0, // line width
+  dynamic: true // whether to run dynamically
+lineWidth: 4.0, // lineWidth: true // whether to run dynamically }
 
-// 默认的颜色配置
-// colorTalbe默认为白色，传入的数组为``[[r, g , b], [r, g, b], ...]``格式
-// 例：[[234 / 255, 0, 0], [0, 123 / 255, 0]]，对应粒子colour字段值从低到高
-defaultColorTable = [[1.0, 1.0, 1.0]]; 
+// Default colour configuration
+// colorTalbe defaults to white, passed in as an array of ``[[r, g , b], [r, g, b], ...] ``Format
+// Example: [[234 / 255, 0, 0], [0, 123 / 255, 0]], corresponding to the particle colour field values from low to high
+defaultColorTable = [[1.0, 1.0, 1.0]];
 ```
 
 ### ``init()``
 
-粒子系统初始化（异步）
+Particle system initialization (asynchronous)
 
 ### ``show()``
 
-粒子系统开始运行，在窗口移动、大小变更、地球缩放、视点相机移动时粒子系统会暂停，停止操作后继续运行
+Particle system starts running, pauses when window moves, size changes, earth zooms, viewpoint camera moves, and continues after stopping the operation
 
 ### ``hide()``
 
-暂停运行粒子系统
+Pause the particle system
 
 ### ``optinsChange(options)``
 
-传入粒子系统配置参数，更新粒子运行状态
+Pass in particle system configuration parameters to update the running state of the particle
 
 ### ``remove()``
 
-从cesiumview中移除粒子系统
+Removes the particle system from the cesiumview
 
 ### ``getFileFields()``
 
-读取NetCDF文件字段，用于加载不同的矢量场文件，参见demo
+Retrieve NetCDF file fields for loading different vector field files, see demo
 
 ```js
 import { getFileFields } from 'cesium-particle';
 
 const file = File("uv3z.nc")
 getFileFields(file).then(res => {
-  ... 
+  ...
   /*res: {
     variables: ["water_u", "water_v", "depth", "time", "lat", "lon", "time_run"],
     dimensions: ["depth", "time", "lat", "lon"],
@@ -199,41 +199,41 @@ getFileFields(file).then(res => {
 
 ## Demo
 
-[查看在线Demo](https://cesium-particle.vercel.app/)
+[View Online Demo](https://cesium-particle.vercel.app/)
 
-[示例数据](https://github.com/hongfaqiu/cesium-particle/tree/master/data)
+[Example data](https://github.com/hongfaqiu/cesium-particle/tree/master/data)
 
-### 运行说明
+### Running instructions
 
 ```js
 yarn / npm install
 npm start
 ```
 
-### 运行图片
+### Run the image
 
-| ![10w风场粒子](https://user-images.githubusercontent.com/62411296/125084621-51948380-e0fc-11eb-8883-a8e265470402.png) | ![25w海流粒子](https://user-images.githubusercontent.com/62411296/125084661-5ce7af00-e0fc-11eb-982b-46d42627318a.png) |
+| ! [10w wind field particles](https://user-images.githubusercontent.com/62411296/125084621-51948380-e0fc-11eb-8883-a8e265470402.png) | ! [25w ocean current particles](https://user-images.githubusercontent.com/62411296/125084661-5ce7af00-e0fc-11eb-982b-46d42627318a.png) |
 | ------- | ------- |
-| ![中国海海流](https://user-images.githubusercontent.com/62411296/125084828-86a0d600-e0fc-11eb-877e-b79865b82cfe.png) | ![25万个粒子的的涡旋](https://user-images.githubusercontent.com/62411296/125084984-acc67600-e0fc-11eb-81c4-8c265cae62f4.png)|
+| ! [China Sea Currents](https://user-images.githubusercontent.com/62411296/125084828-86a0d600-e0fc-11eb-877e-b79865b82cfe.png) | ! [Vortex of 250,000 particles](https://user-images.githubusercontent.com/62411296/125084984-acc67600-e0fc-11eb-81c4-8c265cae62f4.png)|
 
-## Q&A
+## Q & A
 
-### 更改glsl文件之后未生效
+### Changes to glsl file did not work
 
-在开发环境中调试glsl文件,需要在.src/modules/particlescomputing.js 和 particlesRendering.js 中修改glsl文件入口：
+To debug the glsl file in the development environment, you need to change the glsl file entry in .src/modules/particlescomputing.js and particlesRendering.js to
 
 ```js
-import { CalculateSpeedShader, UpdatePositionShader, PostProcessingPositionShader } from '../../packages/shader';
+import { CalculateSpeedShader, UpdatePositionShader, PostProcessingPositionShader } from '... /... /packages/shader';
 ```
 
-在webpack.config.js中添加glsl-loader
+Add glsl-loader to webpack.config.js
 
 ```js
 module.exports = {
   module: {
     rules: [
       {
-        test: /\.(frag|vert)$/,
+        test: /\. (frag|vert)$/,
         loader: 'webpack-glsl-loader'
       }
     ]
@@ -241,40 +241,40 @@ module.exports = {
 }
 ```
 
-或者使用打包命令，打包glsl文件为js:
+Or use the package command and package the glsl file as js:
 
 ```js
 npm run build-glsl
 ```
 
-### 怎样加载自己的.nc文件
+### How to load your own .nc file
 
-.nc文件最好为NetCDF version 3形式
+The .nc file should preferably be in the form of NetCDF version 3
 
-文件中必须至少包含以下属性：
+The file must contain at least the following attributes.
 
-- 横向速度矩阵 U (lev, lat, lon)
-- 纵向速度矩阵 V (lev, lat, lon)
-- 经度维度 lon(0 - 360)
-- 纬度维度 lat
+- Horizontal velocity matrix U (lev, lat, lon)
+- Vertical velocity matrix V (lev, lat, lon)
+- Longitude dimension lon (0 - 360)
+- latitude dimension lat
 
-可使用`getFileFields()`方法读取.nc文件中的属性字段名、维度字段名
+You can use the `getFileFields()` method to read the attribute field names and dimension field names from the .nc file
 
-并配合构造函数`new Particle3D()`中传入的`fields`字段，尝试加载到地球上。
+and with the `fields` field passed in the constructor `new Particle3D()`, try to load it onto the earth.
 
-noData值设为0， 或者加载时配置valueRange属性。
+Set the noData value to 0, or configure the valueRange property when loading.
 
-如果经度范围不在(0, 360)，纬度范围不在(-90, 90)，需要配置offset属性。
+If the longitude range is not (0, 360) and the latitude range is not (-90, 90), the offset property needs to be configured.
 
-### 为什么移除了原作者绘制矩形时采用的Miter Joint算法
+### Why remove the Miter Joint algorithm used by the original author to draw the rectangle
 
-请看[issue](https://github.com/hongfaqiu/cesium-particle/issues/3)
+See [issue](https://github.com/hongfaqiu/cesium-particle/issues/3)
 
-问题已经定位，后面有机会再尝试解决吧。
+The problem has been located, so I'll try to fix it later when I get a chance.
 
-### 其它问题
+### Other issues
 
-`0.7.0`版本之后，cesium引入方式改为
+After version ``0.7.0``, the way cesium was introduced was changed to
 
 ```js
   import * as Cesium from 'cesium'

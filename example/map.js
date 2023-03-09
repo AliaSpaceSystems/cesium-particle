@@ -7,21 +7,22 @@ var viewer = null;
 export var initMap = function (cesiumContainer) {
   viewer = new Cesium.Viewer(cesiumContainer, {
     terrainProvider: Cesium.createWorldTerrain(),
-    baseLayerPicker: false,   //图层选择器
-    animation: false,   //左下角仪表
-    fullscreenButton: false,   //全屏按钮
-    geocoder: false,   //右上角查询搜索
-    infoBox: false,   //信息框
-    homeButton: false,   //home按钮
-    sceneModePicker: false,  //3d 2d选择器
+    baseLayerPicker: false,   // Layer Selector
+    animation: false,   // Lower Left Gauge
+    fullscreenButton: false,   // Full screen button
+    geocoder: false,   // Top right query search
+    infoBox: false,   // Infobox
+    homeButton: false,   // Home button
+    sceneModePicker: false,  // 3d 2d selector
     selectionIndicator: false,  //
-    timeline: false,   //时间轴
-    navigationHelpButton: false,  //右上角帮助按钮
+    timeline: false,   // Timeline
+    navigationHelpButton: false,  // Help button in the top right corner
   })
-  
-  viewer.camera.setView({//镜头的经纬度、高度。镜头默认情况下，在指定经纬高度俯视（pitch=-90）地球
-    destination: Cesium.Cartesian3.fromDegrees(110.60396458865515, 34.54408834959379, 15000000),//北京15000公里上空
-    orientation: {
+
+  // The latitude, longitude and altitude of the lens. By default,
+  // the lens looks down on the earth at the specified latitude and longitude altitude (pitch=-90)
+  viewer.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(110.60396458865515, 34.54408834959379, 15000000), // 15,000 km over Beijing
       heading: Cesium.Math.toRadians(0),
       pitch: Cesium.Math.toRadians(-90),
       roll: Cesium.Math.toRadians(0),
@@ -32,16 +33,17 @@ export var initMap = function (cesiumContainer) {
   })
   viewer._cesiumWidget._creditContainer.style.display = "none";
   viewer.imageryLayers.addImageryProvider(imageryProvider);
-  viewer.scene.fog.density = 0.0001; // 雾气中水分含量
+  viewer.scene.fog.density = 0.0001; // Moisture content in the fog
   viewer.scene.globe.enableLighting = false;
   viewer.scene.skyBox.show = false;
-  //显示刷新率和帧率
+  // Display refresh rate and frame rate
   viewer.scene.debugShowFramesPerSecond = true;
-  
-  if(Cesium.FeatureDetection.supportsImageRenderingPixelated()){//判断是否支持图像渲染像素化处理
+
+  //Determining whether image rendering pixelation is supported
+  if(Cesium.FeatureDetection.supportsImageRenderingPixelated()){
     viewer.resolutionScale = window.devicePixelRatio;
   }
-  //开启抗锯齿
+  // Turn on anti-aliasing
   viewer.scene.fxaa = true;
   viewer.scene.postProcessStages.fxaa.enabled = true;
 }

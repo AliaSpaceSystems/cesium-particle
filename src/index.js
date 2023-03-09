@@ -6,7 +6,7 @@ const getFileFields = file => {
   return new Promise((resolve, reject) => {
     try {
       const reader = new FileReader();
-      // 用readAsText读取文件文件内容
+      // Read the contents of a document file with readAsText
       reader.readAsArrayBuffer(file);
       reader.onload = function () {
         var NetCDF = new netcdfjs(reader.result);
@@ -18,6 +18,6 @@ const getFileFields = file => {
       reject(e);
     }
   })
-} 
+}
 
 export { Particle3D, Vortex, getFileFields };
