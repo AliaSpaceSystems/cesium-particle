@@ -2,7 +2,7 @@
 
 ! [npm](https://img.shields.io/npm/v/cesium-particle) ! [npm](https://img.shields.io/npm/dt/cesium-particle) ! [GitHub](https://img.shields.io/github/license/hongfaqiu/cesium-particle)
 
-## 说明
+## Description
 
 This module is adapted from the [RaymanNg big man's wind farm demo](https://github.com/RaymanNg/3D-Wind-Field).
 
@@ -28,7 +28,7 @@ import { Particle3D } from "cesium-particle";
 </tbody>
 </table>
 
-## 例子
+## Example
 
 ```js
 import { Particle3D, Vortex } from 'cesium-particle'
