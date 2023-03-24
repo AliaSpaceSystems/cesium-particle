@@ -23,10 +23,9 @@ export var initMap = function (cesiumContainer) {
   // the lens looks down on the earth at the specified latitude and longitude altitude (pitch=-90)
   viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(110.60396458865515, 34.54408834959379, 15000000), // 15,000 km over Beijing
-      heading: Cesium.Math.toRadians(0),
-      pitch: Cesium.Math.toRadians(-90),
-      roll: Cesium.Math.toRadians(0),
-    },
+    heading: Cesium.Math.toRadians(0),
+    pitch: Cesium.Math.toRadians(-90),
+    roll: Cesium.Math.toRadians(0)
   });
   let imageryProvider = new Cesium.ArcGisMapServerImageryProvider({
       url: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"

@@ -8,7 +8,7 @@
     "start": "cross-env NODE_ENV=dev webpack-dev-server",
     "build-glsl": "webpack --config webpack.glsl.config.js",
     "build-example": "cross-env NODE_ENV=prd webpack --config webpack.config.js",
-    "eschange": "babel src -d lib",
+    "eschange": "node_modules/@babel/cli/bin/babel.js src -d lib",
     "prepublish": "npm run build-glsl && npm run eschange "
   },
   "repository": {
@@ -45,13 +45,18 @@
     "html-webpack-plugin": "^5.3.1",
     "style-loader": "^2.0.0",
     "url-loader": "^4.1.1",
-    "webpack": "^5.33.2",
+    "webpack": "^5.76.3",
     "webpack-bundle-analyzer": "^4.4.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.2",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.4",
     "webpack-glsl-loader": "^1.0.1"
   },
   "dependencies": {
-    "netcdfjs": "^1.0.0"
+    "assert": "^2.0.0",
+    "browserify-zlib": "^0.2.0",
+    "https-browserify": "^1.0.0",
+    "netcdfjs": "^1.0.0",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0"
   }
 }

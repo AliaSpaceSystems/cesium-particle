@@ -6,7 +6,7 @@
 
 This module is adapted from the [RaymanNg big man's wind farm demo](https://github.com/RaymanNg/3D-Wind-Field).
 
-The loaded .nc file belongs to NetCDF version 3 data file, to load other .nc files please see [Q&A](https://github.com/hongfaqiu/cesium-particle#%E6%80%8E%E6%A0%B7%E5%8A%A0%E8%BD%BD% E8%87%AA%E5%B7%B1%E7%9A%84nc%E6%96%87%E4%BB%B6).
+The loaded .nc file belongs to NetCDF version 3 data file, to load other .nc files please see [Q&A](https://github.com/hongfaqiu/cesium-particle#%E6%80%8E%E6%A0%B7%E5%8A%A0%E8%BD%BD%E8%87%AA%E5%B7%B1%E7%9A%84nc%E6%96%87%E4%BB%B6).
 
 The demo.nc file used in this example has a resolution of 28km, see the data on this website [Panoply](https://www.giss.nasa.gov/tools/panoply/)
 

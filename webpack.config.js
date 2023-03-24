@@ -30,15 +30,25 @@ let config = {
       'cesium': path.resolve(__dirname, 'node_modules/cesium')
     },
     fallback: {
-      fs: false
+      fs: false,
+      zlib: require.resolve("browserify-zlib"),
+      assert: require.resolve("assert"),
+      stream: require.resolve("stream-browserify"),
+      https: require.resolve("https-browserify"),
+      http: require.resolve("stream-http"),
     }
   },
   module: {
     rules: [
       {
-        test: /(\.js)$/,
+        test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          }
+        }
       },
       {
         test:/\.css$/,
@@ -78,9 +88,8 @@ let config = {
     new webpack.HotModuleReplacementPlugin(), // Hot Update Plugin
   ],
   devServer: {
-    contentBase: './dist',      // Service catalogue for development environments
-    historyApiFallback: true,
-    inline: true,
+    static: './dist', // Instead of 'contentBase'
+    hot: true, // Enable hot module replacement
     port: 9000
   }
 };
